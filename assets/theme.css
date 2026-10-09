@@ -1,0 +1,435 @@
+:root {
+    /* Light Theme Colors (Clean Off-White & Soft Indigo/Teal Accent) */
+    --bg-primary: #fcfcfd;
+    --bg-secondary: #f8fafc;
+    --bg-sidebar: #f8fafc;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --accent: #4f46e5;
+    --accent-hover: #4338ca;
+    --accent-rgb: 79, 70, 229;
+    --border-color: #e2e8f0;
+    
+    /* Callout & Theorem Box Colors */
+    --callout-note-bg: rgba(59, 130, 246, 0.07);
+    --callout-note-border: #3b82f6;
+    --callout-warning-bg: rgba(245, 158, 11, 0.07);
+    --callout-warning-border: #f59e0b;
+    --callout-important-bg: rgba(239, 68, 68, 0.07);
+    --callout-important-border: #ef4444;
+    --callout-tip-bg: rgba(16, 185, 129, 0.07);
+    --callout-tip-border: #10b981;
+    --callout-caution-bg: rgba(139, 92, 246, 0.07);
+    --callout-caution-border: #8b5cf6;
+
+    /* Shadows & Effects */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+    --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+
+    /* Cozy Slate Light Code Blocks (Light Mode) */
+    --code-bg: #f8fafc;
+    --code-text: #1e293b;
+    --code-line-hover: rgba(79, 70, 229, 0.06);
+}
+
+/* Dark Theme Adjustments if the document uses quarto-dark mode */
+body.quarto-dark {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-sidebar: #0b0f19;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --accent: #818cf8;
+    --accent-hover: #6366f1;
+    --accent-rgb: 129, 140, 248;
+    --border-color: #334155;
+    
+    --callout-note-bg: rgba(59, 130, 246, 0.15);
+    --callout-warning-bg: rgba(245, 158, 11, 0.15);
+    --callout-important-bg: rgba(239, 68, 68, 0.15);
+    --callout-tip-bg: rgba(16, 185, 129, 0.15);
+    --callout-caution-bg: rgba(139, 92, 246, 0.15);
+
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.4), 0 2px 6px -1px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.5), 0 4px 12px -2px rgba(0, 0, 0, 0.4);
+
+    /* Premium Dark Code Blocks (Dark Mode) */
+    --code-bg: #0d1117;
+    --code-text: #c9d1d9;
+    --code-line-hover: rgba(99, 102, 241, 0.15);
+}
+
+/* ==========================================================================
+   Typography Resets & Base Styles
+   ========================================================================== */
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.75;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-top: 1.8em;
+    margin-bottom: 0.6em;
+}
+
+h1.title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-top: 1rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-bottom: 10px;
+}
+
+/* ==========================================================================
+   Callouts & Custom Message Boxes
+   ========================================================================== */
+.tcolorbox, .block {
+    border: none;
+    border-left: 4px solid #d97706;
+    background-color: var(--callout-warning-bg);
+    box-shadow: var(--shadow-sm);
+    border-radius: 10px;
+    padding: 18px;
+    margin: 24px 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.theorem,
+.definition,
+.example,
+.note,
+.taside,
+.tsidebar,
+.tcallout,
+.tannotation {
+    border: none;
+    border-left: 4px solid var(--accent);
+    background-color: var(--callout-note-bg);
+    box-shadow: var(--shadow-sm);
+    border-radius: 10px;
+    padding: 18px;
+    margin: 24px 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.theorem:hover,
+.definition:hover,
+.example:hover,
+.note:hover,
+.tcolorbox:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+/* Native Quarto Callouts (Note, Warning, Caution, Tip, Important) */
+.callout.callout-style-default {
+    border: none !important;
+    border-radius: 10px !important;
+    box-shadow: var(--shadow-sm) !important;
+    padding: 18px !important;
+    margin: 28px 0 !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.callout.callout-style-default:hover {
+    box-shadow: var(--shadow-md) !important;
+}
+
+.callout-note.callout-style-default {
+    border-left: 4px solid var(--callout-note-border) !important;
+    background-color: var(--callout-note-bg) !important;
+}
+
+.callout-warning.callout-style-default {
+    border-left: 4px solid var(--callout-warning-border) !important;
+    background-color: var(--callout-warning-bg) !important;
+}
+
+.callout-important.callout-style-default {
+    border-left: 4px solid var(--callout-important-border) !important;
+    background-color: var(--callout-important-bg) !important;
+}
+
+.callout-tip.callout-style-default {
+    border-left: 4px solid var(--callout-tip-border) !important;
+    background-color: var(--callout-tip-bg) !important;
+}
+
+.callout-caution.callout-style-default {
+    border-left: 4px solid var(--callout-caution-border) !important;
+    background-color: var(--callout-caution-bg) !important;
+}
+
+.callout-header {
+    margin-bottom: 8px;
+    font-weight: 600 !important;
+    color: var(--text-primary) !important;
+}
+
+.callout-title {
+    font-weight: 600 !important;
+    font-size: 0.95rem;
+}
+
+.callout-icon-container {
+    margin-right: 10px;
+}
+
+/* ==========================================================================
+   Code Blocks & Syntax Highlighting
+   ========================================================================== */
+div.sourceCode {
+    background-color: var(--code-bg) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 12px !important;
+    box-shadow: var(--shadow-md) !important;
+    margin: 28px 0 !important;
+    padding: 0 !important;
+    overflow-x: auto !important;
+}
+
+pre.sourceCode {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 18px !important;
+    overflow: visible !important;
+}
+
+pre.sourceCode:not(.numberSource) {
+    margin: 0 !important;
+}
+
+pre.sourceCode.numberSource {
+    margin: 0 0 0 3.2em !important;
+    padding: 18px 18px 18px 4px !important;
+}
+
+pre.numberSource code > span > a:first-child::before {
+    text-decoration: none !important;
+    color: var(--text-secondary) !important;
+    opacity: 0.7;
+}
+
+pre.sourceCode code {
+    font-family: var(--font-mono) !important;
+    font-size: 0.9rem !important;
+    color: var(--code-text) !important;
+    background: transparent !important;
+    padding: 0 !important;
+}
+
+pre.sourceCode code>span {
+    display: inline-block;
+    padding: 0 4px;
+    transition: background-color 0.15s ease;
+}
+
+pre.sourceCode:not(.numberSource) code>span {
+    width: 100%;
+}
+
+/* Inline code tags */
+code:not(pre code) {
+    background-color: var(--bg-secondary) !important;
+    color: #db2777; /* Soft violet/pink for accent inline code */
+    font-family: var(--font-mono) !important;
+    font-size: 0.85em !important;
+    padding: 3px 7px !important;
+    border-radius: 6px !important;
+    border: 1px solid var(--border-color) !important;
+    white-space: nowrap;
+}
+
+body.quarto-dark code:not(pre code) {
+    color: #f472b6;
+    background-color: var(--bg-secondary) !important;
+}
+
+pre.text {
+    background: var(--bg-secondary) !important;
+    border-left: 3px solid var(--accent) !important;
+    border-radius: 0 8px 8px 0 !important;
+    padding: 14px 18px !important;
+    font-family: var(--font-mono) !important;
+    color: var(--text-primary) !important;
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+}
+
+/* ==========================================================================
+   Sidebar, Navigation & Table of Contents (TOC)
+   ========================================================================== */
+.sidebar nav[role="doc-toc"] ul>li>a,
+.sidebar-navigation a {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-left: 2px solid transparent;
+    padding: 6px 12px !important;
+    color: var(--text-secondary);
+}
+
+/* TOC levels styling */
+.sidebar nav[role="doc-toc"] ul>li>a {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.sidebar nav[role="doc-toc"] ul>li>ul>li>a {
+    color: var(--text-secondary);
+    font-size: 0.9em;
+}
+
+.sidebar nav[role="doc-toc"] ul>li>ul>li>ul>li>a {
+    color: var(--text-secondary);
+    opacity: 0.7;
+    font-size: 0.85em;
+}
+
+/* Active Indicator with soft background and left line */
+.sidebar nav[role="doc-toc"] ul li a.active,
+.sidebar-navigation .active,
+.sidebar-item-container a.active {
+    color: var(--accent) !important;
+    background-color: rgba(var(--accent-rgb), 0.05) !important;
+    border-left: 2px solid var(--accent) !important;
+    font-weight: 600;
+    border-radius: 0 6px 6px 0;
+}
+
+/* Hover effects */
+.sidebar nav[role="doc-toc"] ul li a:hover,
+.sidebar-navigation a:hover,
+.sidebar-item-container a:hover {
+    color: var(--text-primary) !important;
+    background-color: rgba(var(--accent-rgb), 0.03);
+    border-left: 2px solid rgba(var(--accent-rgb), 0.3) !important;
+    text-decoration: none;
+}
+
+/* Fade unselected items slightly when one item is active */
+.sidebar nav[role="doc-toc"] ul li a:not(.active) {
+    opacity: 0.8;
+}
+
+.sidebar nav[role="doc-toc"] ul li a:hover:not(.active) {
+    opacity: 1;
+}
+
+/* Case transforms from user original */
+div.sidebar-menu-container span.menu-text {
+    text-transform: uppercase;
+}
+
+div.sidebar-menu-container span.chapter-title {
+    text-transform: lowercase;
+}
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 36px 0 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: var(--shadow-md) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+th, td {
+    padding: 14px 20px !important;
+    text-align: left !important;
+    border: none !important;
+    border-bottom: 1px solid var(--border-color) !important;
+}
+
+th {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.06em !important;
+}
+
+tbody tr {
+    transition: background-color 0.2s ease !important;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: var(--bg-primary) !important;
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(var(--accent-rgb), 0.01) !important;
+}
+
+tbody tr:hover {
+    background-color: rgba(var(--accent-rgb), 0.04) !important;
+    cursor: pointer !important;
+}
+
+/* ==========================================================================
+   Images, Figures & Figures Hover Zoom
+   ========================================================================== */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px !important;
+    border: 1px solid var(--border-color) !important;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+img:hover {
+    transform: scale(1.015);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(var(--accent-rgb), 0.3) !important;
+}
+
+figure {
+    text-align: center;
+    margin: 36px 0;
+}
+
+figure>figcaption {
+    text-align: center !important;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 14px;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.edit-btn {
+    background-color: var(--accent) !important;
+    color: white !important;
+    border: none !important;
+    padding: 10px 18px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    box-shadow: var(--shadow-sm) !important;
+    transition: all 0.2s ease !important;
+}
+
+.edit-btn:hover {
+    background-color: var(--accent-hover) !important;
+    box-shadow: var(--shadow-md) !important;
+}
